@@ -23,3 +23,6 @@ def do_pack():
     # cmd = "tar -cvzf versions/{} {}"
     cmd = cmd.format(archive, to_be_archived)
     local(cmd)
+
+    # Archive is in path=> versions/archive_file_name
+    return "versions/{}".format(archive)
