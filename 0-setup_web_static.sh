@@ -9,6 +9,9 @@ apt-get --assume-yes update
 apt-get --assume-yes install nginx
 ufw allow 'Nginx HTTP'
 
+# User
+adduser --force ubuntu		# Creates user and group
+
 # Folders
 mkdir --parents /data/
 
