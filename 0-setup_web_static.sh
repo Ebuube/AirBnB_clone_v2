@@ -19,9 +19,6 @@ mkdir --parents /data/web_static/releases/
 mkdir --parents /data/web_static/shared/
 mkdir --parents /data/web_static/releases/test/
 
-# Ownership
-chown --no-dereference --recursive ubuntu:ubuntu /data
-
 # Fake HTML file
 echo '<html>
   <head>
@@ -40,8 +37,9 @@ if [ -e "$web_current" ]; then
 	rm --force "$web_current"
 fi
 ln --symbolic "$test_dir" "$web_current"
-chown --recursive ubuntu:ubuntu "$web_current"
 
+# Ownership
+chown --no-dereference --recursive ubuntu:ubuntu /data
 
 # Update Nginx configuration
 nginx_conf=/etc/nginx/sites-enabled/default
