@@ -19,9 +19,9 @@ def do_deploy(archive_path):
     # print("type: {} | val = {}".format(type(archive_path), archive_path))
 
     # Get name for unzipped file
-    archive = archive_path.split(sep="versions/")[1]
+    archive = archive_path.split(sep='/')[1]
     unzipped = archive.split(sep=".tgz")[0]
-    # print("Unzipped: {}".format(unzipped))
+    deployable = "/data/web_static/releases/{}".format(unzipped)
 
     # Upload archive
     if run("mkdir --parents /tmp/").failed is True:
@@ -31,12 +31,18 @@ def do_deploy(archive_path):
         return False
 
     # Uncompress archive
-    cmd = "mkdir --parents /data/web_static/releases/{}/".format(unzipped)
+
+    cmd = "mkdir --parents {}".format(deployable)
     if run(cmd).failed is True:
         return False
 
-    cmd = "tar -xzf /tmp/{} -C /data/web_static/releases/{}/"
-    cmd = cmd.format(archive, unzipped)
+    # Clean directory before decompression
+    cmd = "rm --recursive --force {}/*".format(deployable)
+    if run(cmd).failed is True:
+        return False
+
+    cmd = "tar -xzf /tmp/{} -C {}/".format(archive, deployable)
+    # cmd = cmd.format(archive, deployable)
     if run(cmd).failed is True:
         return False
 
@@ -45,12 +51,11 @@ def do_deploy(archive_path):
     if run(cmd).failed is True:
         return False
 
-    cmd = "mv -f /data/web_static/releases/{}/web_static/*".format(unzipped)
-    cmd = cmd + " /data/web_static/releases/{}/".format(unzipped)
+    cmd = "mv -f {}/web_static/* {}".format(deployable, deployable)
     if run(cmd).failed is True:
         return False
 
-    cmd = "rm -rf /data/web_static/releases/{}/web_static".format(unzipped)
+    cmd = "rm -rf {}/web_static".format(deployable)
     if run(cmd).failed is True:
         return False
 
@@ -58,8 +63,7 @@ def do_deploy(archive_path):
     if run("rm -rf /data/web_static/current").failed is True:
         return False
 
-    cmd = "ln -sf /data/web_static/releases/{}/".format(unzipped)
-    cmd = cmd + " /data/web_static/current"
+    cmd = "ln -sf {}/ /data/web_static/current".format(deployable)
     if run(cmd).failed is True:
         return False
 
