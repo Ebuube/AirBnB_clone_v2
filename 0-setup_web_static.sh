@@ -14,14 +14,13 @@ adduser --force ubuntu		# Creates user and group
 
 # Folders
 mkdir --parents /data
-
-# Ownership
-chown --recursive ubuntu:ubuntu /data
-
 mkdir --parents /data/web_static/
 mkdir --parents /data/web_static/releases/
 mkdir --parents /data/web_static/shared/
 mkdir --parents /data/web_static/releases/test/
+
+# Ownership
+chown --no-dereference --recursive ubuntu:ubuntu /data
 
 # Fake HTML file
 echo '<html>
