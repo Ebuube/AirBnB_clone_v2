@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 """
 Deploy archive to web servers
+Command: All in one line
+    fab -f ./this_file_name
+    do_deploy:archive_path=versions/web_static_2023032405215.tgz
+    -i my_ssh_private_key -u ubuntu
 """
 from fabric.api import *
 from os.path import isfile

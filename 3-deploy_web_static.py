@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
 Full Deployment
+Command:
+    fab -f ./this_file_name deploy -i my_ssh_private_key -u ubuntu
 """
 from fabric.api import *
 from os.path import isfile

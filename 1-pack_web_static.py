@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
 Compress static web page
+Command:
+    fab -f ./this_file_name do_pack
 """
 from fabric.api import *
 from datetime import datetime
