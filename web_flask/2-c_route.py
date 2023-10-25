@@ -29,6 +29,13 @@ def hello_c(text):
     """
     Say hello to C
     """
+    old_symbol = "_"
+    new_symbol = " "
+    try:
+        text = str(text)
+        text = text.replace(old_symbol, new_symbol)
+    except Exception:
+        pass
     return f"C {text}"
 
 
