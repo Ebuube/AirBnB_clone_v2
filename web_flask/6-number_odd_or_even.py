@@ -1,0 +1,84 @@
+#!/usr/bin/python3
+"""
+A simple web application
+"""
+from flask import Flask
+from flask import render_template
+
+app = Flask(__name__)
+
+
+@app.route('/', strict_slashes=False)
+def greetings():
+    """
+    Say hello to friends
+    """
+    return "Hello HBNB!"
+
+
+@app.route('/hbnb', strict_slashes=False)
+def hello_hbnb():
+    """
+    Say hello to HBNB
+    """
+    return "HBNB"
+
+
+@app.route('/c/<text>', strict_slashes=False)
+def hello_c(text):
+    """
+    Say hello to C
+    """
+    old_symbol = "_"
+    new_symbol = " "
+    try:
+        text = str(text)
+        text = text.replace(old_symbol, new_symbol)
+    except Exception:
+        pass
+    return f"C {text}"
+
+
+@app.route('/python/', strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
+def hello_python(text="is cool"):
+    """
+    Say hello to Python
+    """
+    old_symbol = "_"
+    new_symbol = " "
+    try:
+        text = str(text)
+        text = text.replace(old_symbol, new_symbol)
+    except Exception:
+        pass
+    return f"Python {text}"
+
+
+@app.route('/number/<int:n>', strict_slashes=False)
+def is_number(n):
+    """
+    Check if a number is passed
+    """
+    return f"{n} is a number"
+
+
+@app.route('/number_template/<int:n>', strict_slashes=False)
+def num_template(n):
+    """
+    Render a HTML template using this number
+    """
+    return render_template('5-number.html', number=n)
+
+
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
+def is_odd_or_even(n):
+    """
+    Render template using this number
+    and tell if odd or even
+    """
+    return render_template('6-number_odd_or_even.html', number=n)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
