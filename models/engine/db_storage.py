@@ -149,5 +149,6 @@ class DBStorage:
     def close(self):
         """
         Close connection to database storage
+        Get ready for a new thread
         """
         self.__session.close()

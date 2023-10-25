@@ -37,8 +37,8 @@ class State(BaseModel, Base):
             if objs is None:
                 return list()
 
-            for obj in models.storage.all(City):
-                if objs.state_id == self.id:
-                    objs.append(obj)
+            for city in models.storage.all(City).values():
+                if city.state_id == self.id:
+                    objs.append(city)
 
             return objs

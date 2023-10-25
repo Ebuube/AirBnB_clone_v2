@@ -82,8 +82,8 @@ class Place(BaseModel, Base):
             if objs is None:
                 return list()
 
-            for obj in models.storage.all(City):
-                if objs.place_id == self.id:
+            for obj in models.storage.all(City).values():
+                if obj.place_id == self.id:
                     objs.append(obj)
 
             return objs
@@ -96,7 +96,7 @@ class Place(BaseModel, Base):
             from models.amenity import Amenity
 
             objs = list()
-            for obj in storage.all(Amenity):
+            for obj in storage.all(Amenity).values():
                 if obj.place_id == self.id:
                     objs.append(obj)
 

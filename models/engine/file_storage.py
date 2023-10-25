@@ -84,5 +84,6 @@ class FileStorage:
     def close(self):
         """
         Close connection to storage
+        Get ready for a new thread.
         """
-        pass
+        self.reload()
