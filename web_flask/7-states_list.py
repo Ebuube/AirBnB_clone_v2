@@ -27,7 +27,12 @@ def list_states():
     Display the available states
     """
     states = storage.all(State)
-    return render_template('7-states_list.html', states=states)
+    states = [val for val in states.values()]
+    sorted_states = sorted(states, key=lambda x: x.name)
+    print("Test")
+    print("states: {}".format(states))
+    print("sorted_states: {}".format(sorted_states))
+    return render_template('7-states_list.html', states=sorted_states)
 
 
 if __name__ == '__main__':
