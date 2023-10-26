@@ -1,0 +1,41 @@
+#!/usr/bin/python3
+"""
+A simple web application
+"""
+from flask import Flask
+from flask import render_template
+from models import storage
+from models.state import State
+
+app = Flask(__name__)
+
+
+@app.teardown_appcontext
+def close_db(error):
+    """
+    Close connection
+    """
+    if error is not None:
+        print("An error occured:", error)
+    else:
+        storage.close()
+
+
+@app.route('/cities_by_states', strict_slashes=False)
+def list_states():
+    """
+    Display the available states
+    """
+    states = storage.all(State)
+    # Sort the states according to name in ascending order
+    states = [val for val in states.values()]
+    sorted_states = sorted(states, key=lambda x: x.name)
+    # Sort the cities
+    for state in sorted_states:
+        state.cities = sorted(state.cities, key=lambda x: x.name)
+
+    return render_template('8-cities_by_states.html', states=sorted_states)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
