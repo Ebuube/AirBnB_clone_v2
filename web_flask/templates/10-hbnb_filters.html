@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>AirBnB Clone</title>
+
+        <!--Favicon-->
+        <link rel="icon" type="image/png" href="images/icon.png">
+
+        <!--STYLING-->
+        <link rel="stylesheet" href="../static/styles/4-common.css">
+        <link rel="stylesheet" href="../static/styles/3-header.css">
+        <link rel="stylesheet" href="../static/styles/3-footer.css">
+        <link rel="stylesheet" href="../static/styles/6-filters.css">
+    </head>
+
+    <!--Body-->
+    <body>
+        <!--HEADER-->
+        <header>
+            <div class="header_logo"></div>
+        </header>
+
+        <!--CONTAINER-->
+        <div class="container">
+            <section class="filters">
+                <!--LOCATIONS-->
+                <div class="locations">
+                    <h3>States</h3>
+                    <h4>&nbsp</h4>
+
+		    {% if states and states|length > 0 %}
+                    <ul class="popover">
+			{% for state in states.values()|sort(attribute='name') %}
+                        <li class="state">
+			    <h2>{{ state.name }}:</h2>
+			    {% if state.cities and state.cities|length > 0 %}
+                            <ul>
+				{% for city in state.cities|sort(attribute='name') %}
+				<li>{{ city.name }}</li>
+				{% endfor %}
+                            </ul>
+			    {% endif %}
+                        </li>
+			{% endfor %}
+
+                    </ul>
+                </div>
+		{% endif %}
+
+                <!--AMENITIES-->
+                <div class="amenities">
+                    <h3>Amenities</h3>
+                    <h4>&nbsp</h4>
+
+		    {% if amenities and amenities.values()|length > 0 %}
+                    <ul class="popover">
+			{% for amenity in amenities.values()|sort(attribute='name') %}
+			<li>{{ amenity.name }}</li>
+			{% endfor %}
+                    </ul>
+		    {% endif %}
+                </div>
+
+                <!--BUTTON-->
+                <button>Search</button>
+            </section>
+        </div>
+
+        <!--FOOTER-->
+        <footer>
+            <p>Best School</p>
+        </footer>
+    </body>
+</html>
