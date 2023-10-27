@@ -27,14 +27,7 @@ def list_states():
     Display the available states
     """
     states = storage.all(State)
-    # Sort the states according to name in ascending order
-    states = [val for val in states.values()]
-    sorted_states = sorted(states, key=lambda x: x.name)
-    # Sort the cities
-    for state in sorted_states:
-        state.cities = sorted(state.cities, key=lambda x: x.name)
-
-    return render_template('8-cities_by_states.html', states=sorted_states)
+    return render_template('8-cities_by_states.html', states=states)
 
 
 if __name__ == '__main__':
