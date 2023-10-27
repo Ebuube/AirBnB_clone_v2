@@ -1,9 +1,12 @@
+/* STYLING FOR FOOTER */
 footer {
-	position: fixed;
-	bottom: 0;
-	background-color: #00FF00;
-	height: 60px;
-	width: 100%;
-	text-align: center;
-	line-height: 30px;
+    background-color:#00FF00;
+    color:black;
+    height:60px;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    z-index:1;
+    text-align:center;
+    line-height:60px;
 }

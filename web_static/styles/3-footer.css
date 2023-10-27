@@ -1,10 +1,19 @@
+/* STYLING FOR FOOTER */
 footer {
-	position: fixed;
-	bottom: 0;
-	background-color: white;
-	height: 60px;
-	width: 100%;
-	text-align: center;
-	line-height: 30px;
-	border-top: 1px solid #CCCCCC;
+    position:fixed;
+    bottom:0;
+    background-color:white;
+    height:60px;
+    width:100%;
+    border-top:1px #CCCCCC solid;
+}
+
+footer p {
+    text-align:center;
+    line-height:30px;
+}
+
+.pagefooter {
+    /* Prevent hiding items beneath the fixed and remove footer */
+    margin-top:60px;    /* same as footer height */
 }
